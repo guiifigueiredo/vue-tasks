@@ -5,6 +5,9 @@
     </div>
      <div class="column is-three-quarter">
        <VueFormulario/>
+       <div class="lista">
+         <TaskAction/>
+       </div>
      </div>
  </main>
 </template>
@@ -14,13 +17,16 @@
 import {defineComponent} from "vue";
 import BarraLateral from "@/components/BarraLateral.vue";
 import VueFormulario from "@/components/VueFormulario.vue";
+import TaskAction from "@/components/TaskAction.vue";
 
 export default defineComponent({
   name: 'App',
-  components: {VueFormulario, BarraLateral}
+  components: {TaskAction, VueFormulario, BarraLateral}
 })
 </script>
 
 <style>
-
+.lista {
+  padding: 1.5rem;
+}
 </style>

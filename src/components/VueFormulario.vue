@@ -10,60 +10,37 @@
             type="text"
             class="input"
             placeholder="Qual tarefa você deseja iniciar?"
+            v-model="descricao"
         />
       </div>
       <div class="column">
-        <div
-            class="is-flex is-align-items-center is-justify-content-space-between"
-        >
-          <section>
-            <strong>
-              {{ tempoDecorrido }}
-            </strong>
-          </section>
-          <button class="button" @click="iniciar">
-            <span class="icon">
-              <i class="fas fa-play"></i>
-            </span>
-            <span>play</span>
-          </button>
-          <button class="button" @click="finalizar">
-            <span class="icon">
-              <i class="fas fa-stop"></i>
-            </span>
-            <span>stop</span>
-          </button>
-        </div>
+        <TimerBreak @breakTime="finalizarTarefa"/>
       </div>
     </div>
   </div>
 </template>
+
 <script lang="ts">
   import { defineComponent } from "vue";
+  import StopWatch from "@/components/StopWatch.vue";
+  import TimerBreak from "@/components/TimerBreak.vue";
 
   export default defineComponent({
     name: 'VueFormulario',
-    data() {
-      return {
-        tempo : 0 ,
-        cronometro : 0
-      }
+    components: {
+      TimerBreak
     },
-    computed: {
-      tempoDecorrido(): string {
-        return new Date( this.tempo * 1000).toISOString().substr(11,8)
+    data(){
+      return {
+        descricao: ''
       }
     },
     methods: {
-      iniciar(){
-        this.cronometro = setInterval(() => {
-          this.tempo += 1
-        }, 1000)
-        console.log('iniciado ')
-      },
-      finalizar(){
-        clearInterval(this.cronometro)
-        console.log('finalizado')
+      finalizarTarefa(tempoDecorrido: number) : void {
+        console.log('tempo da tarefa', tempoDecorrido)
+        console.log('descricao:', this.descricao)
+
+        this.descricao = ''
       }
     }
   })
